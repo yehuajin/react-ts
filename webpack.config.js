@@ -44,6 +44,24 @@ const webpackBaseConfig = {
       },
     ],
   },
+  externals: {
+    // react: 'react', // 放到静态服务器不需要打包的库
+  },
+  resolve: {
+    alias: {
+      // tsconfig.json中也要对应设置
+      '@assets': resolve('src/assets'),
+      '@components': resolve('src/components'),
+      '@models': resolve('src/models'),
+      '@routes': resolve('src/routes'),
+      '@pages': resolve('src/pages'),
+      '@utils': resolve('src/utils'),
+      '@recoil': resolve('src/recoil'),
+      '@hooks': resolve('src/hooks'),
+      '@api': resolve('src/api'),
+    },
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  },
   plugins: [
     new MiniCssExtractPlugin({
       filename: _modeFlag
