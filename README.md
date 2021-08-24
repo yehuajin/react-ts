@@ -11,3 +11,5 @@ Windows：
 但是，sh文件在windows中无法直接运行！所以按照上面的方式在windows中使用scripty可能会报错
 spawn：UNKOWN
 所以，在Windows环境下创建scripts-win目录，将.sh文件改为.bat文件，其余同上
+
+# 需要增加eslint
