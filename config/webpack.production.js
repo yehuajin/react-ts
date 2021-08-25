@@ -1,5 +1,5 @@
-const { join, resolve } = require('path');
-const htmlWebpackPlugin = require('html-webpack-plugin');
+const { resolve } = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -57,7 +57,7 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new htmlWebpackPlugin({
+    new HtmlWebpackPlugin({
       title: 'webpack-ts-demo',
       filename: 'index.html',
       template: resolve(__dirname, '../template/prod.html'),

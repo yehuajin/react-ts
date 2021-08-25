@@ -1,5 +1,5 @@
 const { join, resolve } = require('path');
-const htmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -15,10 +15,13 @@ module.exports = {
     // node-notifier, webpack-build-notifier
     // quiet: true, // 配合friendly-error-webpack-plugin
     watchContentBase: true,
+    stats: {
+      errorDetails: true,
+    },
   },
   devtool: 'source-map',
   plugins: [
-    new htmlWebpackPlugin({
+    new HtmlWebpackPlugin({
       title: 'webpack-ts-demo',
       filename: 'index.html',
       template: resolve(__dirname, '../template/dev.html'),

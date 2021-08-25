@@ -29,6 +29,13 @@ const webpackBaseConfig = {
   module: {
     rules: [
       {
+        test: /\.(jsx|js|ts|tsx)$/,
+        include: [resolve('src')],
+        exclude: [/node_modules/],
+        use: ['eslint-loader'],
+        enforce: 'pre',
+      },
+      {
         test: /\.(js|jsx|ts|tsx)/,
         include: [resolve('src')],
         exclude: /node_modules/,
@@ -64,12 +71,8 @@ const webpackBaseConfig = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: _modeFlag
-        ? 'styles/[name].[contenthash:5].css'
-        : 'styles/[name].css',
-      chunkFilename: _modeFlag
-        ? 'styles/[id].[contenthash:5].css'
-        : 'styles/[id].css',
+      filename: _modeFlag ? 'styles/[name].[contenthash:5].css' : 'styles/[name].css',
+      chunkFilename: _modeFlag ? 'styles/[id].[contenthash:5].css' : 'styles/[id].css',
       ignoreOrder: true, // 忽略css文件引入的顺序，如果不设置在不能的js中引入css顺序不同就会产生警告
     }),
   ],
