@@ -2,7 +2,7 @@ const fontCarrier = require('font-carrier');
 const fs = require('fs');
 const path = require('path');
 // 文件根路径
-const root = `src${path.sep}styles${path.sep}icon-fonts`;
+const root = `src${path.sep}assets${path.sep}font${path.sep}icon-fonts`;
 // 删除字体文件夹中的所有文件
 (function deleteDir(dir) {
   const fontDirFiles = fs.readdirSync(dir);

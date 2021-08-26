@@ -15,8 +15,10 @@ spawn：UNKOWN
 # 需要加的功能
 ## 需要增加eslint
 ## 增加svg转icon处理
+展示全部icon的页面未添加路由
 ## 增加css模块化
 .module.scss文件进行模块化处理
+## 增加css变量
 ## 增加静态资源copy
 还没加
 
