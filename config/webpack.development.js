@@ -24,7 +24,7 @@ module.exports = {
     },
     proxy: {
       '/app/**': {
-        target: 'https://demo-zm.xfyun.cn/',
+        target: 'https://127.0.0.1/',
         headers: {
           'X-Real-IP': '127.0.0.1',
         },
