@@ -68,6 +68,7 @@ const webpackBaseConfig = {
       '@recoil': resolve('src/recoil'),
       '@hooks': resolve('src/hooks'),
       '@api': resolve('src/api'),
+      '@styles': resolve('src/styles'),
     },
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
