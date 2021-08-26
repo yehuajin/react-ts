@@ -29,10 +29,6 @@ const cssLoaders = [
     },
   },
 ];
-const handleLoader = (type) => {
-  const loaders = [...cssLoaders, { loader: `${type}-loader` }];
-  return loaders;
-};
 
 const webpackBaseConfig = {
   entry: {
@@ -62,11 +58,19 @@ const webpackBaseConfig = {
       },
       {
         test: /\.(scss)/,
-        use: handleLoader('sass'),
+        use: cssLoaders.concat([
+          { loader: `sass-loader` },
+          {
+            loader: 'sass-resources-loader',
+            options: {
+              resources: [resolve('src/assets/css/variable.scss')],
+            },
+          },
+        ]),
       },
       {
         test: /\.(less)/,
-        use: handleLoader('less'),
+        use: cssLoaders.concat([{ loader: `less-loader` }]),
       },
       {
         test: /\.(png|jpeg|git|eot|woff|woff2|ttf|svg|otf|webp)$/,
