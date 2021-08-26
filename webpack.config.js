@@ -6,6 +6,11 @@ _env = _env === 'development' ? 'development' : 'production';
 const _envFlag = _env === 'production';
 const _mergeConfig = require(`./config/webpack.${_env}.js`);
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const lessToJs = require('less-vars-to-js');
+const fs = require('fs');
+const themeVariables = lessToJs(
+  fs.readFileSync(join(__dirname, './src/assets/css/theme.less'), 'utf8')
+);
 
 const cssLoaders = [
   // post-css-preset-env和@babel/preset-env一样解析最新的css语法
@@ -70,7 +75,9 @@ const webpackBaseConfig = {
       },
       {
         test: /\.(less)/,
-        use: cssLoaders.concat([{ loader: `less-loader` }]),
+        use: cssLoaders.concat([
+          { loader: `less-loader`, options: { modifyVars: themeVariables } },
+        ]),
       },
       {
         test: /\.(png|jpeg|git|eot|woff|woff2|ttf|svg|otf|webp)$/,

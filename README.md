@@ -18,8 +18,8 @@ spawn：UNKOWN
 展示全部icon的页面未添加路由
 ## 增加css模块化
 .module.scss文件进行模块化处理
-## 增加css变量
-## 增加静态资源copy
+## 增加css变量,ant css全局变量修改
+## 增加静态资源copy(静态资源放在assets文件中)
 还没加
 
 
