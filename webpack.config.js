@@ -1,9 +1,10 @@
 const merge = require('webpack-merge');
 const { join, resolve } = require('path');
 const argv = require('yargs-parser')(process.argv.slice(2));
-const _mode = argv.mode || 'development';
-const _modeFlag = _mode === 'production';
-const _mergeConfig = require(`./config/webpack.${_mode}.js`);
+let _env = argv.env || 'development';
+_env = _env === 'development' ? 'development' : 'production';
+const _envFlag = _env === 'production';
+const _mergeConfig = require(`./config/webpack.${_env}.js`);
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const cssLoaders = [
@@ -57,6 +58,7 @@ const webpackBaseConfig = {
   resolve: {
     alias: {
       // tsconfig.json中也要对应设置
+      '@config': resolve(`src/config/env-${argv.env || 'development'}.js`), // 注意tsconfig中的配置
       '@assets': resolve('src/assets'),
       '@components': resolve('src/components'),
       '@models': resolve('src/models'),
@@ -71,8 +73,8 @@ const webpackBaseConfig = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: _modeFlag ? 'styles/[name].[contenthash:5].css' : 'styles/[name].css',
-      chunkFilename: _modeFlag ? 'styles/[id].[contenthash:5].css' : 'styles/[id].css',
+      filename: _envFlag ? 'styles/[name].[contenthash:5].css' : 'styles/[name].css',
+      chunkFilename: _envFlag ? 'styles/[id].[contenthash:5].css' : 'styles/[id].css',
       ignoreOrder: true, // 忽略css文件引入的顺序，如果不设置在不能的js中引入css顺序不同就会产生警告
     }),
   ],

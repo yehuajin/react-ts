@@ -1,1 +1,1 @@
-webpack serve --mode development --open
+webpack serve --env development --open
