@@ -15,10 +15,24 @@ const cssLoaders = [
     loader: 'css-loader',
     options: {
       importLoaders: 1, // 0 => 无loader(默认); 1 => postcss-loader; 2 => postcss-loader, sass-loader; 用于配置css-loader作用于@import 的资源之前有多少个loader
+      modules: {
+        auto: (resourcePath) => resourcePath.endsWith('.module.scss'),
+      },
     },
   },
-  { loader: 'postcss-loader' },
+  {
+    loader: 'postcss-loader',
+    options: {
+      postcssOptions: {
+        plugins: () => [require('autoprefixer')({ browsers: ['> 1%', 'ie >= 9'] })],
+      },
+    },
+  },
 ];
+const handleLoader = (type) => {
+  const loaders = [...cssLoaders, { loader: `${type}-loader` }];
+  return loaders;
+};
 
 const webpackBaseConfig = {
   entry: {
@@ -43,8 +57,16 @@ const webpackBaseConfig = {
         loader: 'babel-loader',
       },
       {
-        test: /\.(css|scss)/,
+        test: /\.(css)/,
         use: cssLoaders,
+      },
+      {
+        test: /\.(scss)/,
+        use: handleLoader('sass'),
+      },
+      {
+        test: /\.(less)/,
+        use: handleLoader('less'),
       },
       {
         test: /\.(png|jpeg|git|eot|woff|woff2|ttf|svg|otf|webp)$/,
@@ -70,7 +92,7 @@ const webpackBaseConfig = {
       '@api': resolve('src/api'),
       '@styles': resolve('src/styles'),
     },
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss', '.less', '.css'],
   },
   plugins: [
     new MiniCssExtractPlugin({

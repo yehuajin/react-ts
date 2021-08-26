@@ -12,11 +12,13 @@ Windows：
 spawn：UNKOWN
 所以，在Windows环境下创建scripts-win目录，将.sh文件改为.bat文件，其余同上
 
-# 都需要加的功能
+# 需要加的功能
 ## 需要增加eslint
-## 增加svg处理
+## 增加svg转icon处理
 ## 增加css模块化
+.module.scss文件进行模块化处理
 ## 增加静态资源copy
+还没加
 
 
 # 移动端要加的功能
