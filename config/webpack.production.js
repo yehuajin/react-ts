@@ -2,6 +2,7 @@ const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: 'production',
@@ -66,6 +67,15 @@ module.exports = {
         collapseWhitespace: true, // 所有代码折叠起来
         removeAttributeQuotes: true,
       },
+    }),
+    // copy custom static assets
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: resolve(__dirname, '../static'),
+          to: 'static',
+        },
+      ],
     }),
   ],
 };
