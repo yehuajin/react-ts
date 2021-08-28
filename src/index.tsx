@@ -9,4 +9,4 @@ import ReactDom from 'react-dom';
 // console.log(env);
 // import style from './index.module.scss';
 
-ReactDom.render(<div>hello world</div>, document.querySelector('#app'));
+ReactDom.render(<div>hello world1</div>, document.querySelector('#app'));

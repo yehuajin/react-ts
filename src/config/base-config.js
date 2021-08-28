@@ -1,3 +1,3 @@
 export default {
-  basename: '',
+  basename: '/assets',
 };

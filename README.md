@@ -12,15 +12,20 @@ Windows：
 spawn：UNKOWN
 所以，在Windows环境下创建scripts-win目录，将.sh文件改为.bat文件，其余同上
 
+## cnpm 安装模块可以，但cnpm uninstall 卸载时就不行
+这是由于npm和cnpm的全局模块地址不同造成的。
+先获取npm全局模块地址 npm config get prefix
+再设置cnpm全局模块地址 cnpm config set prefix <npm全局模块地址>
+
 # 需要加的功能
 ## 需要增加eslint
 ## 增加svg转icon处理
-展示全部icon的页面未添加路由
+展示全部icon的页面未添加路由(未完成)
 ## 增加css模块化
 .module.scss文件进行模块化处理
 ## 增加css变量,ant css全局变量修改
 ## 增加静态资源copy(静态资源放在assets文件中)
-还没加
+
 
 
 # 移动端要加的功能
