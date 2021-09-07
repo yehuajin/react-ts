@@ -13,7 +13,7 @@ const routes: RouteProps[] = [
     component: Home,
   },
   {
-    path: 'icon-list',
+    path: '/icon-list',
     exact: true,
     component: IconList,
   },

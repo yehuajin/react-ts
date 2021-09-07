@@ -1,4 +1,4 @@
-const { join, resolve } = require('path');
+const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const notifier = require('node-notifier');
@@ -10,10 +10,11 @@ module.exports = {
   output: {
     assetModuleFilename: 'images/[name][ext]', // 对应rules中图片文件资源中的type: 'asset'
     filename: 'scripts/[name].bundle.js',
+    publicPath: '/',
   },
   devServer: {
     historyApiFallback: true, // 刷新页面会响应到index页面，避免出现404
-    contentBase: join(__dirname, '../dist'), // 资源文件目录
+    // contentBase: join(__dirname, '../dist/assets'), // 资源文件目录
     inline: true, // 模式 iframe，监听文件变化，自动刷新页面
     port: prot,
     // node-notifier, webpack-build-notifier
