@@ -80,7 +80,7 @@ const webpackBaseConfig = {
         ]),
       },
       {
-        test: /\.(png|jpeg|git|eot|woff|woff2|ttf|svg|otf|webp)$/,
+        test: /\.(png|jpeg|git|eot|woff|woff2|ttf|svg|otf|webp|json)$/,
         type: 'asset', // 不需要file-loader,webpack内置了
       },
     ],

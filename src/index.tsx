@@ -5,8 +5,9 @@ import '@assets/css/common.scss';
 // icon字体样式
 import '@assets/font/icon-fonts/icon.css';
 import ReactDom from 'react-dom';
+import App from '@pages/App';
 // import env from '@config';
 // console.log(env);
 // import style from './index.module.scss';
 
-ReactDom.render(<div>hello world1</div>, document.querySelector('#app'));
+ReactDom.render(<App />, document.querySelector('#app'));

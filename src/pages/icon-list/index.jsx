@@ -1,7 +1,7 @@
 import React from 'react';
 import css from './index.module.scss';
-
-const iconList = require('@styles/icon-fonts/icon.json');
+// const iconList = require('@assets/font/icon-fonts/icon.json');
+import iconList from '@assets/font/icon-fonts/icon.json';
 
 const Icon = () => {
   return (
