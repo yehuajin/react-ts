@@ -1,4 +1,4 @@
-const { resolve } = require('path');
+const { join, resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -9,7 +9,8 @@ module.exports = {
   output: {
     assetModuleFilename: 'images/[name].[contenthash:5].bundle.[ext]', // 对应rules中图片文件资源中的type: 'asset'
     filename: 'scripts/[name].[contenthash:5].bundle.js',
-    publicPath: '/assets', // cdn使用
+    publicPath: '/assets/', // cdn使用
+    path: join(__dirname, './dist/assets'),
   },
   // https://segmentfault.com/a/1190000039730567
   optimization: {
@@ -68,7 +69,7 @@ module.exports = {
         removeAttributeQuotes: true,
       },
     }),
-    // copy custom static assets
+    // copy custom static 资源
     new CopyWebpackPlugin({
       patterns: [
         {

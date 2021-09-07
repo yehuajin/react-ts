@@ -40,7 +40,7 @@ const webpackBaseConfig = {
     app: resolve('src/index.tsx'),
   },
   output: {
-    path: join(__dirname, './dist/assets'),
+    path: join(__dirname, './dist'),
   },
   module: {
     rules: [
