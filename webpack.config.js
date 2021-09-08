@@ -27,11 +27,6 @@ const cssLoaders = [
   },
   {
     loader: 'postcss-loader',
-    options: {
-      postcssOptions: {
-        plugins: () => [require('autoprefixer')({ browsers: ['> 1%', 'ie >= 9'] })],
-      },
-    },
   },
 ];
 
