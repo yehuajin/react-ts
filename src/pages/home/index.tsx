@@ -1,4 +1,4 @@
-import './index.module.scss';
+import style from './index.module.scss';
 import React, { FC, ReactNode } from 'react';
 
 interface props {
@@ -6,7 +6,7 @@ interface props {
 }
 const Home: FC<props> = (props) => {
   console.log(props);
-  return <div>home</div>;
+  return <div className={style.color}>home</div>;
 };
 
 export default Home;
