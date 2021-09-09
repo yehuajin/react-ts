@@ -26,3 +26,5 @@ spawn：UNKOWN
 ## 增加css变量,ant css全局变量修改
 ## 增加静态资源copy(静态资源放在assets文件中)
 
+## 增加recoil
+## 增加axios封装
