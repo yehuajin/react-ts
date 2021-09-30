@@ -50,6 +50,10 @@ const webpackBaseConfig = {
   output: {
     path: join(__dirname, './dist'),
   },
+  // 解决支持ie
+  // 传递多个目标时使用共同的特性子集
+  // webpack 将生成 web 平台的运行时代码，并且只使用 ES5 相关的特性。
+  target: ['web', 'es5', 'browserslist'],
   module: {
     rules: [
       {
