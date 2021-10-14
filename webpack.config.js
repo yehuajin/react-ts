@@ -49,6 +49,7 @@ const webpackBaseConfig = {
   },
   output: {
     path: join(__dirname, './dist'),
+    clean: true,
   },
   // 解决支持ie
   // 传递多个目标时使用共同的特性子集
