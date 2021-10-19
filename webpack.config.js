@@ -16,7 +16,7 @@ const config = require('./config/index');
 const cssLoaders = [
   // post-css-preset-env和@babel/preset-env一样解析最新的css语法
   // { loader: 'style-loader' }, // 是将样式插入到html页面的style中，提取出来就不用这么做了
-  MiniCssExtractPlugin.loader,
+  _envFlag ? MiniCssExtractPlugin.loader : 'style-loader',
   {
     loader: 'css-loader',
     options: {
@@ -51,10 +51,6 @@ const webpackBaseConfig = {
     path: join(__dirname, './dist'),
     clean: true,
   },
-  // 解决支持ie
-  // 传递多个目标时使用共同的特性子集
-  // webpack 将生成 web 平台的运行时代码，并且只使用 ES5 相关的特性。
-  target: ['web', 'es5', 'browserslist'],
   module: {
     rules: [
       {
@@ -93,7 +89,7 @@ const webpackBaseConfig = {
         ]),
       },
       {
-        test: /\.(png|jpeg|git|eot|woff|woff2|ttf|svg|otf|webp|json)$/,
+        test: /\.(png|jpeg|git|eot|woff|woff2|ttf|svg|otf|webp|json|jpg)$/,
         type: 'asset', // 不需要file-loader,webpack内置了
       },
     ],
@@ -117,17 +113,17 @@ const webpackBaseConfig = {
     },
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.scss', '.less', '.css'],
   },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: _envFlag
-        ? `${config.assets}/styles/[name].[contenthash:5].css`
-        : `${config.assets}/styles/[name].css`,
-      chunkFilename: _envFlag
-        ? `${config.assets}/styles/[id].[contenthash:5].css`
-        : `${config.assets}/styles/[id].css`,
-      ignoreOrder: true, // 忽略css文件引入的顺序，如果不设置在不能的js中引入css顺序不同就会产生警告
-    }),
-  ],
+  plugins: [].concat(
+    _envFlag
+      ? [
+          new MiniCssExtractPlugin({
+            filename: `${config.assets}/styles/[name].[contenthash:5].css`,
+            chunkFilename: `${config.assets}/styles/[id].[contenthash:5].css`,
+            ignoreOrder: true, // 忽略css文件引入的顺序，如果不设置在不能的js中引入css顺序不同就会产生警告
+          }),
+        ]
+      : []
+  ),
 };
 
 module.exports = merge.default(webpackBaseConfig, _mergeConfig);
