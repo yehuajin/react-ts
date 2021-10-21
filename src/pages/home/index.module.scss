@@ -1,9 +1,11 @@
 .color {
   color: red;
+
   &.center-no-module {
     font-size: 28px;
   }
 }
+
 :global {
   .center {
     font-weight: bold;
