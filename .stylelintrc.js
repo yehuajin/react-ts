@@ -13,5 +13,7 @@ module.exports = {
       },
     ],
     'comment-empty-line-before': false,
+    'value-list-comma-newline-after': false,
+    'declaration-colon-newline-after': false,
   },
 };
