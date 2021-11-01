@@ -8,9 +8,7 @@ const _mergeConfig = require(`./config/webpack.${_env}.js`);
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const lessToJs = require('less-vars-to-js');
 const fs = require('fs');
-const themeVariables = lessToJs(
-  fs.readFileSync(join(__dirname, './src/assets/css/theme.less'), 'utf8')
-);
+const themeVariables = lessToJs(fs.readFileSync(join(__dirname, './src/assets/css/theme.less'), 'utf8'));
 const config = require('./config/index');
 
 const cssLoaders = [
@@ -20,6 +18,7 @@ const cssLoaders = [
   {
     loader: 'css-loader',
     options: {
+      sourceMap: !_envFlag,
       importLoaders: 1, // 0 => 无loader(默认); 1 => postcss-loader; 2 => postcss-loader, sass-loader; 用于配置css-loader作用于@import 的资源之前有多少个loader
       modules: {
         auto: (resourcePath) => resourcePath.endsWith('.module.scss'),
@@ -37,8 +36,21 @@ const cssLoaders = [
     loader: 'postcss-loader',
     options: {
       postcssOptions: {
-        plugins: () => [require('autoprefixer')({ browsers: ['> 1%', 'ie >= 9'] })],
+        plugins: [
+          'postcss-flexbugs-fixes',
+          [
+            'postcss-preset-env',
+            {
+              autoprefixer: {
+                grid: true,
+                flexbox: 'no-2009',
+              },
+            },
+          ],
+          'postcss-normalize',
+        ],
       },
+      sourceMap: !_envFlag,
     },
   },
 ];
@@ -84,9 +96,7 @@ const webpackBaseConfig = {
       },
       {
         test: /\.(less)/,
-        use: cssLoaders.concat([
-          { loader: `less-loader`, options: { modifyVars: themeVariables } },
-        ]),
+        use: cssLoaders.concat([{ loader: `less-loader`, options: { modifyVars: themeVariables } }]),
       },
       {
         test: /\.(png|jpeg|git|eot|woff|woff2|ttf|svg|otf|webp|json|jpg)$/,
@@ -122,7 +132,7 @@ const webpackBaseConfig = {
             ignoreOrder: true, // 忽略css文件引入的顺序，如果不设置在不能的js中引入css顺序不同就会产生警告
           }),
         ]
-      : []
+      : [],
   ),
 };
 
