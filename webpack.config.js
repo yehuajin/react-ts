@@ -14,7 +14,20 @@ const config = require('./config/index');
 const cssLoaders = [
   // post-css-preset-env和@babel/preset-env一样解析最新的css语法
   // { loader: 'style-loader' }, // 是将样式插入到html页面的style中，提取出来就不用这么做了
-  _envFlag ? MiniCssExtractPlugin.loader : 'style-loader',
+  _envFlag ? MiniCssExtractPlugin.loader : {
+    loader: 'style-loader',
+    options: {
+      // 解决common.scss文件样式被覆盖
+      // insert: function insertAtTop(element) {
+      //   const style = document.querySelector('style');
+      //   if (style) {
+      //     style.parentNode.insertBefore(element, style);
+      //   } else {
+      //     document.querySelector('head')?.appendChild(element);
+      //   }
+      // },
+    },
+  },
   {
     loader: 'css-loader',
     options: {
@@ -126,12 +139,21 @@ const webpackBaseConfig = {
   plugins: [].concat(
     _envFlag
       ? [
-          new MiniCssExtractPlugin({
-            filename: `${config.assets}/styles/[name].[contenthash:5].css`,
-            chunkFilename: `${config.assets}/styles/[id].[contenthash:5].css`,
-            ignoreOrder: true, // 忽略css文件引入的顺序，如果不设置在不能的js中引入css顺序不同就会产生警告
-          }),
-        ]
+        new MiniCssExtractPlugin({
+          // 解决common.scss文件样式被覆盖
+          // insert: function (linkTag) {
+          //   const link = document.querySelector('link');
+          //   if (link) {
+          //     link.parentNode.insertBefore(linkTag, link);
+          //   } else {
+          //     document.querySelector('head')?.appendChild(linkTag);
+          //   }
+          // },
+          filename: `${config.assets}/styles/[name].[contenthash:5].css`,
+          chunkFilename: `${config.assets}/styles/[id].[contenthash:5].css`,
+          ignoreOrder: true, // 忽略css文件引入的顺序，如果不设置在不能的js中引入css顺序不同就会产生警告
+        }),
+      ]
       : [],
   ),
 };
