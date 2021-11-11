@@ -23,7 +23,7 @@ const cssLoaders = [
       //   if (style) {
       //     style.parentNode.insertBefore(element, style);
       //   } else {
-      //     document.querySelector('head')?.appendChild(element);
+      //     document.querySelector('head') && document.querySelector('head').appendChild(element);
       //   }
       // },
     },
@@ -146,7 +146,7 @@ const webpackBaseConfig = {
           //   if (link) {
           //     link.parentNode.insertBefore(linkTag, link);
           //   } else {
-          //     document.querySelector('head')?.appendChild(linkTag);
+          //     document.querySelector('head') && document.querySelector('head').appendChild(linkTag);
           //   }
           // },
           filename: `${config.assets}/styles/[name].[contenthash:5].css`,
